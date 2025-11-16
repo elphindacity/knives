@@ -162,6 +162,9 @@ def submit_score(scoreboard):
         json.dump(data, f, indent=4)
         print("Game Data saved.")
     # END GAME
+    quit_game()
+
+def quit_game():
     st.session_state.playing = False
     st.session_state.target = None
 
@@ -185,6 +188,7 @@ def show_current_game():
     st.write(f"TOTAL : {total}")
     scoreboard[-1]=[total]
     st.button(f"Submit Score", on_click=submit_score, args=[scoreboard])
+    st.button("Quit", on_click=quit_game)
 
 def play_page():
     #nav()
@@ -192,6 +196,7 @@ def play_page():
     if not st.session_state.playing:
         # Show Game List, Play Buttons with Titles
         st.button("Shane's Bullseye 10 feet", on_click=play, args=["game_name"])
+        st.button("Mike's Bullseye 10 feet", on_click=play, args=["game_name"])
     if st.session_state.playing:
         show_current_game()
 
@@ -285,6 +290,7 @@ def stat_page():
     #                 elif x+1 == 3 : mod = "rd"
     #                 elif x+1 > 3 : mod = "th"
     #                 st.write(f"{x+1}{mod} Round :: ( {" - ".join(game['scoreboard'][x])} )")
+    st.write("Game History")
     for game in st.session_state.history:
         if st.checkbox(f"{game["date"]}"):
             tab = "&nbsp;" * 8
