@@ -74,7 +74,7 @@ def login_auth(username, password, filename='users.txt'):
 def sign_in(username,password):
     if username_exists(username):
         if login_auth(username, password):
-            st.session_state.page = "play"
+            st.session_state.page = "Play"
             st.session_state.logged_in = True
             st.session_state.username = username
             st.session_state.targets = load_targets(username)
@@ -187,7 +187,7 @@ def show_current_game():
     st.button(f"Submit Score", on_click=submit_score, args=[scoreboard])
 
 def play_page():
-    nav()
+    #nav()
     st.title("Play")
     if not st.session_state.playing:
         # Show Game List, Play Buttons with Titles
@@ -212,7 +212,7 @@ def del_tar(t_name):
     st.session_state.targets = load_targets(username)
 
 def target_page():
-    nav()
+    #nav()
     st.title("Targets")
 
 
@@ -266,7 +266,7 @@ def load_history(user_name):
     return user_games
 
 def stat_page():
-    nav()
+    #nav()
     st.title("Stats")
 
     # Load History
@@ -306,18 +306,8 @@ def stat_page():
 #     col2.button('Targets', on_click=change_page_targets)
 #     col3.button('Stats', on_click=change_page_stats)
 def nav():
-    st.markdown("""
-    <style>
-        [data-testid="column"] {
-            flex: 1 1 30% !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-    col1, col2, col3 = st.columns(3)
-    col1.button('Play', on_click=change_page_play)
-    col2.button('Targets', on_click=change_page_targets)
-    col3.button('Stats', on_click=change_page_stats)
-
+    with st.sidebar:
+        st.session_state.page = st.radio("Navigation", ("Play", "Targets", "Stats"))
 
 # # Render pages
 def main():
@@ -325,14 +315,16 @@ def main():
         home_page()
     elif st.session_state.page == "sign_up":
         sign_up_page()
-    elif st.session_state.page == "play":
-        play_page()
-    elif st.session_state.page == 'targets':
-        target_page()
-    elif st.session_state.page == 'stats':
-        stat_page()
-    else:
-        home_page("Error")
+    else :
+        nav()
+        if st.session_state.page == "Play":
+            play_page()
+        elif st.session_state.page == 'Targets':
+            target_page()
+        elif st.session_state.page == 'Stats':
+            stat_page()
+        else:
+            home_page("Error")
 
 if __name__ == '__main__':
     main()
