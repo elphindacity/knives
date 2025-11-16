@@ -300,7 +300,19 @@ def stat_page():
 
 
 # NAV BAR
+# def nav():
+#     col1, col2, col3 = st.columns(3)
+#     col1.button('Play', on_click=change_page_play)
+#     col2.button('Targets', on_click=change_page_targets)
+#     col3.button('Stats', on_click=change_page_stats)
 def nav():
+    st.markdown("""
+    <style>
+        [data-testid="column"] {
+            flex: 1 1 30% !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
     col1.button('Play', on_click=change_page_play)
     col2.button('Targets', on_click=change_page_targets)
