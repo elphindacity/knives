@@ -1,0 +1,32 @@
+[
+    {
+        "user": "Shane",
+        "name": "Shane's Target",
+        "shape": "Square",
+        "num_rings": 2,
+        "ring_size": [
+            12,
+            24
+        ],
+        "area": [
+            144,
+            576
+        ]
+    },
+    {
+        "user": "Shane",
+        "name": "Mike'sTarget",
+        "shape": "Square",
+        "num_rings": 3,
+        "ring_size": [
+            6.0,
+            18.0,
+            30.0
+        ],
+        "area": [
+            36.0,
+            324.0,
+            900.0
+        ]
+    }
+]
